@@ -7,7 +7,7 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
   body, html {
-    color: ${props => props.theme.blackColor};
+    color: ${props => props.theme.whiteColor};
     background-color: ${props => props.theme.backgroundColor};
     font-size: 14px;
     font-family: "Nunito", sans-serif;

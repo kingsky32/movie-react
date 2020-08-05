@@ -1,7 +1,7 @@
 import React from "react";
 
-const Home = props => {
+const Ticket = props => {
   return <div />;
 };
 
-export default Home;
+export default Ticket;

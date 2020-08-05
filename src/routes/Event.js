@@ -1,7 +1,7 @@
 import React from "react";
 
-const Home = props => {
+const Event = props => {
   return <div />;
 };
 
-export default Home;
+export default Event;
