@@ -23,7 +23,7 @@ const Movies = props => {
     getData();
   }, []);
   console.log(movies);
-  return <div />;
+  return !isLoading && <div />;
 };
 
 export default Movies;

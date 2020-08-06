@@ -10,6 +10,7 @@ import Ticket from "../routes/Ticket";
 import Theaters from "../routes/Theaters";
 import Header from "./Header";
 import Event from "../routes/Event";
+import RouteContainer from "./RouteContainer";
 
 const Wrapper = styled.div`display: flex;`;
 
@@ -23,11 +24,23 @@ const App = props => {
       <Router>
         <Header />
         <Wrapper>
-          <Route path="/" exact component={Home} />
-          <Route path="/movies" component={Movies} />
-          <Route path="/ticket" component={Ticket} />
-          <Route path="/theaters" component={Theaters} />
-          <Route path="/event" component={Event} />
+          <Route path="/" exact render={() => <RouteContainer component={<Home />} />} />
+          <Route
+            path="/movies"
+            render={() => <RouteContainer title="Movies" component={<Movies />} />}
+          />
+          <Route
+            path="/ticket"
+            render={() => <RouteContainer title="Ticket" component={<Ticket />} />}
+          />
+          <Route
+            path="/theaters"
+            render={() => <RouteContainer title="Theaters" component={<Theaters />} />}
+          />
+          <Route
+            path="/event"
+            render={() => <RouteContainer title="Event" component={<Event />} />}
+          />
         </Wrapper>
       </Router>
     </ThemeProvider>
