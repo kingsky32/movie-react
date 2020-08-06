@@ -6,32 +6,36 @@ import MoviePoster from "../components/MoviePoster";
 import MovieContainer from "../components/MovieContainer";
 
 const date = new Date();
-
 const nowDate = moment(date);
 
 const DailyBoxOffice = () => {
   const [isLoading, setIsloading] = useState(true);
   const [dailyBoxOfficeList, setDailyBoxOfficeList] = useState([]);
   const [boxofficeType, setboxofficeType] = useState("");
-  const getData = async () => {
-    try {
-      setIsloading(true);
-      const data = await getDailyBoxOfficeList({ targetDate: nowDate });
-      setboxofficeType(data.boxofficeType);
-      return await Promise.all(
-        data.dailyBoxOfficeList.map(({ movieNm }) =>
-          getSearchMovie({ searchName: movieNm, display: 1 }).then(data => data[0])
-        )
-      );
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsloading(false);
-    }
-  };
 
   useEffect(() => {
-    getData().then(data => setDailyBoxOfficeList(dailyBoxOfficeList.concat(data)));
+    const dailyData = [];
+    const getData = async () => {
+      try {
+        setIsloading(true);
+        const data = await getDailyBoxOfficeList({ targetDate: nowDate });
+        const { dailyBoxOfficeList } = data;
+        setboxofficeType(data.boxofficeType);
+        return await Promise.all(
+          dailyBoxOfficeList.map(({ movieNm }) =>
+            getSearchMovie({ searchName: movieNm, display: 1 }).then(data =>
+              dailyData.push(data[0])
+            )
+          )
+        );
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsloading(false);
+      }
+    };
+    getData();
+    setDailyBoxOfficeList(dailyData);
   }, []);
 
   return (
