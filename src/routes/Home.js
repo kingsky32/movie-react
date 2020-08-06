@@ -22,13 +22,11 @@ const Movies = () => {
       setIsloading(true);
       const data = await getDailyBoxOfficeList({ targetDate: nowDate });
       setboxofficeType(data.boxofficeType);
-      const temp = [];
-      data.dailyBoxOfficeList.map(({ movieNm }) =>
-        getSearchMovie({ searchName: movieNm, display: 1 }).then(e => {
-          temp.push(e[0]);
-        })
+      return await Promise.all(
+        data.dailyBoxOfficeList.map(({ movieNm }) =>
+          getSearchMovie({ searchName: movieNm, display: 1 }).then(data => data[0])
+        )
       );
-      setDailyBoxOfficeList(temp);
     } catch (error) {
       console.log(error);
     } finally {
@@ -36,10 +34,8 @@ const Movies = () => {
     }
   };
 
-  console.log(dailyBoxOfficeList);
-
   useEffect(() => {
-    getData();
+    getData().then(data => setDailyBoxOfficeList(dailyBoxOfficeList.concat(data)));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
