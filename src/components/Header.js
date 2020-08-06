@@ -5,7 +5,7 @@ import logo from "../assets/image/logo512.png";
 
 const Container = styled.header`
   display: flex;
-  padding: 0 10px;
+  padding: 0 1rem;
   width: 100%;
   height: 50px;
   background-color: ${props => props.theme.darkColor};
@@ -17,19 +17,19 @@ const Navigation = styled.nav`
 `;
 
 const ELink = styled(Link)`
-  font-size: 18px;
-  padding: 0 20px;
+  font-size: 1.8rem;
+  padding: 0 2rem;
   &:hover {
     color: ${props => props.theme.mainColor};
   }
   &:first-child {
-    padding: 0 20px 0 0;
+    padding: 0 2rem 0 0;
   }
 `;
 
 const Image = styled.img`
-  width: 35px;
-  height: 35px;
+  width: 3.5rem;
+  height: 3.5rem;
 `;
 
 const Header = () => {

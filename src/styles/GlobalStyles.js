@@ -9,7 +9,7 @@ export default createGlobalStyle`
   body, html {
     color: ${props => props.theme.whiteColor};
     background-color: ${props => props.theme.backgroundColor};
-    font-size: 14px;
+    font-size: 10px;
     font-family: "Nunito", sans-serif;
   }
   a {

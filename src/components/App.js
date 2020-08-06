@@ -12,7 +12,13 @@ import Header from "./Header";
 import Event from "../routes/Event";
 import RouteContainer from "./RouteContainer";
 
-const Wrapper = styled.div`display: flex;`;
+const Wrapper = styled.div`
+  display: flex;
+  width: 100%;
+  max-width: 166rem;
+  margin: 0 auto;
+  font-size: 1.2rem;
+`;
 
 const App = props => {
   return (

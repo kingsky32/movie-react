@@ -4,7 +4,7 @@ export default {
   backgroundColor: "#0e0e10",
   darkColor: "#18181b",
   lightGreyColor: "#bccee4",
-  darkGreyColor: "#8391a2",
+  darkGreyColor: "#ADADB8",
   mainColor: "#E31911",
   redColor: "#F95271",
   blueColor: "#6771F3",
