@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import getSearchMovie from "./getSearchMovie";
+import LoadingComponent from "./LoadingComponent";
 
 const Container = styled.div`
   display: flex;
@@ -31,6 +32,7 @@ const PosterContainer = styled.div`
 
 const Title = styled.h5`
   font-size: 1.4rem;
+  line-height: 2rem;
   margin-bottom: .5rem;
   &:hover {
     color: ${props => props.theme.mainColor};
@@ -40,6 +42,7 @@ const Title = styled.h5`
 const SubTitle = styled.p`
   color: ${props => props.theme.darkGreyColor};
   font-size: 1.2rem;
+  line-height: 1.5rem;
   margin-bottom: .5rem;
   &:hover {
     color: ${props => props.theme.mainColor};
@@ -70,10 +73,9 @@ const MoviePoster = ({ movieNm, cate = [] }) => {
           setIsloading(true);
           const [data] = await getSearchMovie({ searchName: movieNm, display: 1 });
           setBoxOfficeList(data);
-        } catch (error) {
-          console.log(error);
-        } finally {
           setIsloading(false);
+        } catch (error) {
+          setTimeout(getData, 250);
         }
       };
       getData();
@@ -81,39 +83,38 @@ const MoviePoster = ({ movieNm, cate = [] }) => {
     [movieNm]
   );
 
-  return (
-    !isLoading &&
-    boxOfficeList &&
-    <Container>
-      <PosterContainer>
-        <Link to="/">
-          <Poster url={boxOfficeList.image} />
-        </Link>
-      </PosterContainer>
-      <Title>
-        <Link to="/">
-          {movieNm}
-        </Link>
-      </Title>
-      <SubTitle>
-        <Link to="/">
-          {boxOfficeList.subtitle}
-        </Link>
-      </SubTitle>
-      <PubDate>
-        <Link to="/">
-          {boxOfficeList.pubDate}
-        </Link>
-      </PubDate>
-      <Category>
-        {cate.map(cate =>
-          <Cate>
-            {cate}
-          </Cate>
-        )}
-      </Category>
-    </Container>
-  );
+  return isLoading
+    ? <LoadingComponent />
+    : boxOfficeList &&
+      <Container>
+        <PosterContainer>
+          <Link to="/">
+            <Poster url={boxOfficeList.image} />
+          </Link>
+        </PosterContainer>
+        <Title>
+          <Link to="/">
+            {movieNm}
+          </Link>
+        </Title>
+        <SubTitle>
+          <Link to="/">
+            {boxOfficeList.subtitle}
+          </Link>
+        </SubTitle>
+        <PubDate>
+          <Link to="/">
+            {boxOfficeList.pubDate}
+          </Link>
+        </PubDate>
+        <Category>
+          {cate.map(cate =>
+            <Cate>
+              {cate}
+            </Cate>
+          )}
+        </Category>
+      </Container>;
 };
 
 MoviePoster.propTypes = {};

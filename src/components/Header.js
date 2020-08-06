@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import logo from "../assets/image/logo512.png";
+import Serach from "./Serach";
 
 const Container = styled.header`
   display: flex;
@@ -13,6 +14,7 @@ const Container = styled.header`
 
 const Navigation = styled.nav`
   display: flex;
+  flex: 1;
   align-items: center;
 `;
 
@@ -32,6 +34,20 @@ const Image = styled.img`
   height: 3.5rem;
 `;
 
+const SearchContainer = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+const UserContainer = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
 const Header = () => {
   return (
     <Container>
@@ -44,6 +60,12 @@ const Header = () => {
         <ELink to="/theaters">극장</ELink>
         <ELink to="/event">이벤트&amp;컬쳐</ELink>
       </Navigation>
+      <SearchContainer>
+        <Serach />
+      </SearchContainer>
+      <UserContainer>
+        {/* Todo UserContainer */}
+      </UserContainer>
     </Container>
   );
 };

@@ -16,10 +16,9 @@ const DailyBoxOffice = () => {
       setIsloading(true);
       const data = await getDailyBoxOfficeList({ targetDate: nowDate });
       setDailyBoxOfficeList(data);
+      setIsloading(false);
     } catch (error) {
       console.log(error);
-    } finally {
-      setIsloading(false);
     }
   };
 
