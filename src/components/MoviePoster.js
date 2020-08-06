@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import getSearchMovie from "./getSearchMovie";
 
 const Container = styled.div`
   display: flex;
@@ -58,38 +59,50 @@ const Category = styled.ul``;
 
 const Cate = styled.li``;
 
-const re = /<(\w)+>(.*)<\/\1>/;
+const MoviePoster = ({ movieNm, cate = [] }) => {
+  const [isLoading, setIsloading] = useState(true);
+  const [boxOfficeList, setBoxOfficeList] = useState([]);
 
-const MoviePoster = ({
-  title,
-  subtitle,
-  pubDate,
-  image,
-  actor,
-  director,
-  userRating,
-  cate = []
-}) => {
+  useEffect(
+    () => {
+      const getData = async () => {
+        try {
+          setIsloading(true);
+          const [data] = await getSearchMovie({ searchName: movieNm, display: 1 });
+          setBoxOfficeList(data);
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setIsloading(false);
+        }
+      };
+      getData();
+    },
+    [movieNm]
+  );
+
   return (
+    !isLoading &&
+    boxOfficeList &&
     <Container>
       <PosterContainer>
         <Link to="/">
-          <Poster url={image} />
+          <Poster url={boxOfficeList.image} />
         </Link>
       </PosterContainer>
       <Title>
         <Link to="/">
-          {title && title.match(re)[2]}
+          {movieNm}
         </Link>
       </Title>
       <SubTitle>
         <Link to="/">
-          {subtitle}
+          {boxOfficeList.subtitle}
         </Link>
       </SubTitle>
       <PubDate>
         <Link to="/">
-          {pubDate}
+          {boxOfficeList.pubDate}
         </Link>
       </PubDate>
       <Category>

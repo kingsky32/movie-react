@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
-import getDailyBoxOfficeList from "../components/getDailyBoxOfficeList";
+import getWeeklyBoxOfficeList from "../components/getWeeklyBoxOfficeList";
 import MoviePoster from "../components/MoviePoster";
 import MovieContainer from "../components/MovieContainer";
 
@@ -9,13 +9,13 @@ const nowDate = moment(date);
 
 const DailyBoxOffice = () => {
   const [isLoading, setIsloading] = useState(true);
-  const [dailyBoxOfficeList, setDailyBoxOfficeList] = useState([]);
+  const [weeklyBoxOfficeList, setWeeklyBoxOfficeList] = useState([]);
 
   const getData = async () => {
     try {
       setIsloading(true);
-      const data = await getDailyBoxOfficeList({ targetDate: nowDate });
-      setDailyBoxOfficeList(data);
+      const data = await getWeeklyBoxOfficeList({ targetDate: nowDate });
+      setWeeklyBoxOfficeList(data);
     } catch (error) {
       console.log(error);
     } finally {
@@ -30,8 +30,8 @@ const DailyBoxOffice = () => {
   return (
     !isLoading &&
     <MovieContainer
-      title={dailyBoxOfficeList.boxofficeType}
-      component={dailyBoxOfficeList.dailyBoxOfficeList.map((movie, idx) =>
+      title={weeklyBoxOfficeList.boxofficeType}
+      component={weeklyBoxOfficeList.weeklyBoxOfficeList.map((movie, idx) =>
         <MoviePoster key={idx} isLoading={isLoading} {...movie} />
       )}
     />
