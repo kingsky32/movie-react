@@ -34,7 +34,7 @@ const Title = styled.h5`
   font-size: 1.4rem;
   line-height: 2rem;
   margin-bottom: .5rem;
-  &:hover {
+  a:hover {
     color: ${props => props.theme.mainColor};
   }
 `;
@@ -44,7 +44,7 @@ const SubTitle = styled.p`
   font-size: 1.2rem;
   line-height: 1.5rem;
   margin-bottom: .5rem;
-  &:hover {
+  a:hover {
     color: ${props => props.theme.mainColor};
   }
 `;
@@ -53,7 +53,7 @@ const PubDate = styled.p`
   color: ${props => props.theme.darkGreyColor};
   font-size: 1.2rem;
   margin-bottom: .5rem;
-  &:hover {
+  a:hover {
     color: ${props => props.theme.mainColor};
   }
 `;
