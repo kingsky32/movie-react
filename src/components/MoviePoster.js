@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import getSearchMovie from "./getSearchMovie";
-import LoadingComponent from "./LoadingComponent";
+import LoadingComponent from "./LoadingMoviePoster";
 
 const Container = styled.div`
   display: flex;
@@ -33,6 +33,10 @@ const PosterContainer = styled.div`
 const Title = styled.h5`
   font-size: 1.4rem;
   line-height: 2rem;
+  width: 100%;
+  height: 2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin-bottom: .5rem;
   a:hover {
     color: ${props => props.theme.mainColor};
@@ -43,6 +47,9 @@ const SubTitle = styled.p`
   color: ${props => props.theme.darkGreyColor};
   font-size: 1.2rem;
   line-height: 1.5rem;
+  height: 1.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin-bottom: .5rem;
   a:hover {
     color: ${props => props.theme.mainColor};
@@ -62,10 +69,9 @@ const Category = styled.ul``;
 
 const Cate = styled.li``;
 
-const MoviePoster = ({ movieNm, cate = [] }) => {
+const MoviePoster = ({ movieNm, movieCd, cate = [] }) => {
   const [isLoading, setIsloading] = useState(true);
   const [boxOfficeList, setBoxOfficeList] = useState([]);
-
   useEffect(
     () => {
       const getData = async () => {
@@ -75,7 +81,7 @@ const MoviePoster = ({ movieNm, cate = [] }) => {
           setBoxOfficeList(data);
           setIsloading(false);
         } catch (error) {
-          setTimeout(getData, 250);
+          setTimeout(getData, 150);
         }
       };
       getData();
@@ -88,22 +94,22 @@ const MoviePoster = ({ movieNm, cate = [] }) => {
     : boxOfficeList &&
       <Container>
         <PosterContainer>
-          <Link to="/">
+          <Link to={`/movies/movie/${movieCd}`}>
             <Poster url={boxOfficeList.image} />
           </Link>
         </PosterContainer>
         <Title>
-          <Link to="/">
+          <Link to={`/movies/movie/${movieCd}`}>
             {movieNm}
           </Link>
         </Title>
         <SubTitle>
-          <Link to="/">
+          <Link to={`/movies/movie/${movieCd}`}>
             {boxOfficeList.subtitle}
           </Link>
         </SubTitle>
         <PubDate>
-          <Link to="/">
+          <Link to={`/movies/movie/${movieCd}`}>
             {boxOfficeList.pubDate}
           </Link>
         </PubDate>

@@ -11,6 +11,7 @@ import Theaters from "../routes/Theaters";
 import Header from "./Header";
 import Event from "../routes/Event";
 import RouteContainer from "./RouteContainer";
+import MovieDetail from "../routes/MovieDetail";
 
 const Wrapper = styled.div`
   display: flex;
@@ -33,8 +34,10 @@ const App = props => {
           <Route path="/" exact render={() => <RouteContainer component={<Home />} />} />
           <Route
             path="/movies"
+            exact
             render={() => <RouteContainer title="Movies" component={<Movies />} />}
           />
+          <Route path="/movies/movie/:movieCd" exact component={MovieDetail} />
           <Route
             path="/ticket"
             render={() => <RouteContainer title="Ticket" component={<Ticket />} />}

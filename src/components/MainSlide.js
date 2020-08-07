@@ -63,8 +63,8 @@ const MainSlide = ({ slide = [] }) => {
         }}
         navigation
       >
-        {slide.map(slide =>
-          <SwiperSlide>
+        {slide.map((slide, idx) =>
+          <SwiperSlide key={idx}>
             <Slide>
               <YouTube videoId={slide.videoId} opts={opts} />
             </Slide>

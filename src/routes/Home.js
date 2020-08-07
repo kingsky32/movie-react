@@ -7,6 +7,10 @@ import MainSlide from "../components/MainSlide";
 const Container = styled.div`
   flex: 1;
   width: 100%;
+  padding-top: 2.5rem;
+  > div:not(:last-child) {
+    margin-bottom: 5rem;
+  }
 `;
 
 const Movies = () => {
