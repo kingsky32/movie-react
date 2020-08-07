@@ -3,29 +3,46 @@ import styled from "styled-components";
 import getDetailMovie from "../components/getDetailMovie";
 import getSearchMovie from "../components/getSearchMovie";
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  flex: 1;
+`;
 
-const PosterContainer = styled.div``;
+const PosterContainer = styled.div`
+  flex: 1;
+  margin-right: 2.5rem;
+`;
 
-const Poster = styled.img``;
+const Poster = styled.img`width: 100%;`;
 
-const MetaContainer = styled.div``;
+const MetaContainer = styled.div`flex: 3;`;
 
 const Status = styled.ul``;
 
 const Stat = styled.li``;
 
-const Title = styled.h3``;
+const Title = styled.h3`font-size: 3.2rem;`;
 
-const SubTitle = styled.span``;
+const SubTitle = styled.span`font-size: 1.8rem;`;
 
-const Actors = styled.ul``;
+const Actors = styled.ul`
+  display: flex;
+  flex-flow: row nowrap;
+`;
 
 const Actor = styled.li``;
 
-const Category = styled.ul``;
+const PrdtYear = styled.span``;
+
+const Category = styled.ul`
+  display: flex;
+  flex-flow: row nowrap;
+`;
 
 const Cate = styled.li``;
+
+const Meta = styled.div`display: flex;`;
 
 const MovieDetail = ({ match: { params: { movieCd } } }) => {
   const [movie, setMovie] = useState(null);
@@ -61,22 +78,27 @@ const MovieDetail = ({ match: { params: { movieCd } } }) => {
         <Poster src={poster} />
       </PosterContainer>
       <MetaContainer>
-        <Status>
-          <Stat>
-            {movie.prdtStatNm}
-          </Stat>
-          {movie.audits.map((audit, idx) =>
-            <Stat key={idx}>
-              {audit.watchGradeNm}
-            </Stat>
-          )}
-        </Status>
         <Title>
           {movie.movieNm}
         </Title>
         <SubTitle>
           {movie.movieNmEn}
         </SubTitle>
+        <Meta>
+          <Status>
+            <Stat>
+              {movie.prdtStatNm}
+            </Stat>
+            {movie.audits.map((audit, idx) =>
+              <Stat key={idx}>
+                {audit.watchGradeNm}
+              </Stat>
+            )}
+          </Status>
+          <PrdtYear>
+            {movie.prdtYear}
+          </PrdtYear>
+        </Meta>
         <Actors>
           {movie.actors.map((actor, idx) =>
             <Actor key={idx}>
