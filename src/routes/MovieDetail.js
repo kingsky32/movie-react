@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import getDetailMovie from "../components/getDetailMovie";
 import getSearchMovie from "../components/getSearchMovie";
+import moment from "moment";
 
 const Container = styled.div`
   display: flex;
@@ -10,7 +11,7 @@ const Container = styled.div`
 `;
 
 const PosterContainer = styled.div`
-  flex: 1;
+  width: 16rem;
   margin-right: 2.5rem;
 `;
 
@@ -18,34 +19,91 @@ const Poster = styled.img`width: 100%;`;
 
 const MetaContainer = styled.div`flex: 3;`;
 
-const Status = styled.ul``;
+const WatchGradeNm = styled.p``;
 
-const Stat = styled.li``;
-
-const Title = styled.h3`
-  font-size: 3.2rem;
-  font-weight: 600;
+const Stat = styled.p`
+  font-size: 1.4rem;
+  padding: .5rem 1rem;
+  background-color: ${props => props.theme.mainColor}25;
+  font-weight: 500;
+  margin-left: .5rem;
+  color: ${props => props.theme.mainColor};
 `;
 
-const SubTitle = styled.span`font-size: 1.8rem;`;
+const Title = styled.h3`
+  font-size: 2.2rem;
+  font-weight: 400;
+  margin-bottom: .25rem;
+  display: flex;
+  align-items: center;
+`;
+
+const SubTitle = styled.h5`
+  font-size: 1.3rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+`;
 
 const Actors = styled.ul`
   display: flex;
   flex-flow: row nowrap;
 `;
 
-const Actor = styled.li``;
+const ActorTitle = styled.li`
+  font-size: 1.4rem;
+  margin-right: .5rem;
+`;
 
-const PrdtYear = styled.span``;
+const Directors = styled.ul`
+  display: flex;
+  flex-flow: row nowrap;
+  margin-right: 1rem;
+`;
+
+const DirectorTitle = styled.li`
+  font-size: 1.4rem;
+  margin-right: .5rem;
+`;
+
+const Director = styled.ul`font-size: 1.4rem;`;
+
+const Actor = styled.li`font-size: 1.4rem;`;
 
 const Category = styled.ul`
   display: flex;
   flex-flow: row nowrap;
+  align-items: center;
+  margin-bottom: .5rem;
 `;
 
-const Cate = styled.li``;
+const Cate = styled.li`
+  font-size: 1.4rem;
+  &:first-child::after {
+    content: '/';
+  }
+`;
 
-const Meta = styled.div`display: flex;`;
+const Cut = styled.span`
+  width: .1rem;
+  height: 1rem;
+  display: block;
+  background-color: ${props => props.theme.darkGreyColor};
+  margin: 0 .5rem;
+`;
+
+const OpenDt = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  font-size: 1.4rem;
+  align-items: center;
+  margin-bottom: .5rem;
+  font-weight: 300;
+`;
+
+const Meta = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+`;
 
 const MovieDetail = ({ match: { params: { movieCd } } }) => {
   const [movie, setMovie] = useState(null);
@@ -83,39 +141,54 @@ const MovieDetail = ({ match: { params: { movieCd } } }) => {
       <MetaContainer>
         <Title>
           {movie.movieNm}
+          ({movie.prdtYear})
+          <Stat>{movie.prdtStatNm}</Stat>
         </Title>
         <SubTitle>
           {movie.movieNmEn}
         </SubTitle>
-        <Meta>
-          <Status>
-            <Stat>
-              {movie.prdtStatNm}
-            </Stat>
-            {movie.audits.map((audit, idx) =>
-              <Stat key={idx}>
-                {audit.watchGradeNm}
-              </Stat>
-            )}
-          </Status>
-          <PrdtYear>
-            {movie.prdtYear}
-          </PrdtYear>
-        </Meta>
-        <Actors>
-          {movie.actors.map((actor, idx) =>
-            <Actor key={idx}>
-              {actor.peopleNm}
-            </Actor>
-          )}
-        </Actors>
         <Category>
           {movie.genres.map((genre, idx) =>
             <Cate key={idx}>
               {genre.genreNm}
             </Cate>
           )}
+          <Cut />
+          {movie.nations.map((nation, idx) =>
+            <Cate key={idx}>
+              {nation.nationNm}
+            </Cate>
+          )}
         </Category>
+        <OpenDt>
+          {moment(movie.openDt).format("YYYY.MM.DD")}
+          <Cut />
+          {movie.showTm}분,{" "}
+          {movie.audits.map((audit, idx) =>
+            <WatchGradeNm key={idx}>
+              {audit.watchGradeNm}
+            </WatchGradeNm>
+          )}
+        </OpenDt>
+        <Meta>
+          <Directors>
+            <DirectorTitle>감독</DirectorTitle>
+            {movie.directors.map((director, idx) =>
+              <Director key={idx}>
+                {director.peopleNm}
+              </Director>
+            )}
+          </Directors>
+          <Actors>
+            <ActorTitle>주연</ActorTitle>
+            {movie.actors.map((actor, idx) =>
+              <Actor key={idx}>
+                {actor.peopleNm}
+                {idx < movie.actors.length - 1 && ", "}
+              </Actor>
+            )}
+          </Actors>
+        </Meta>
       </MetaContainer>
     </Container>
   );
