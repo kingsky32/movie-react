@@ -26,6 +26,7 @@ const App = props => {
     <ThemeProvider theme={Theme}>
       <Helmet>
         <title>Movies</title>
+        <link rel="stylesheet" href="../styles/fonts.css" />
       </Helmet>
       <GlobalStyles />
       <Router>

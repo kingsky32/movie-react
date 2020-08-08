@@ -10,7 +10,7 @@ export default createGlobalStyle`
     color: ${props => props.theme.whiteColor};
     background-color: ${props => props.theme.backgroundColor};
     font-size: 10px;
-    font-family: "Nunito", sans-serif;
+    font-family: "NotoSansKr", sans-serif;
   }
   a {
     color: inherit;

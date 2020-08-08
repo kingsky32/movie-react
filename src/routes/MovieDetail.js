@@ -22,7 +22,10 @@ const Status = styled.ul``;
 
 const Stat = styled.li``;
 
-const Title = styled.h3`font-size: 3.2rem;`;
+const Title = styled.h3`
+  font-size: 3.2rem;
+  font-weight: 600;
+`;
 
 const SubTitle = styled.span`font-size: 1.8rem;`;
 
