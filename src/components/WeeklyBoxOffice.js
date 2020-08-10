@@ -28,12 +28,14 @@ const DailyBoxOffice = () => {
   }, []);
 
   return (
-    !isLoading &&
     <MovieContainer
       title={weeklyBoxOfficeList.boxofficeType}
-      component={weeklyBoxOfficeList.weeklyBoxOfficeList.map((movie, idx) =>
-        <MoviePoster key={idx} isLoading={isLoading} {...movie} />
-      )}
+      component={
+        !isLoading &&
+        weeklyBoxOfficeList.weeklyBoxOfficeList.map((movie, idx) =>
+          <MoviePoster key={idx} isLoading={isLoading} {...movie} />
+        )
+      }
     />
   );
 };
