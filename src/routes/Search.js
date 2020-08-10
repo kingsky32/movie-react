@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import getSearchMovie from "../components/getSearchMovie";
+import SearchCompoent from "../components/SearchCompoent";
+import styled from "styled-components";
+
+const Container = styled.div``;
 
 const Search = ({ location: { search } }) => {
   const searchName = search.split("=")[1];
@@ -24,9 +28,11 @@ const Search = ({ location: { search } }) => {
     [searchName]
   );
 
-  console.log(searchData);
-
-  return isLoading && <div />;
+  return (
+    <Container>
+      {!isLoading && searchData.map((data, idx) => <SearchCompoent key={idx} {...data} />)}
+    </Container>
+  );
 };
 
 export default Search;
