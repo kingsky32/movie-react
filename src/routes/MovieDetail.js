@@ -3,8 +3,10 @@ import styled from "styled-components";
 import getDetailMovie from "../components/getDetailMovie";
 import getSearchMovie from "../components/getSearchMovie";
 import moment from "moment";
+import { Helmet } from "react-helmet";
 
 const Container = styled.div`
+  padding-top: 5rem;
   display: flex;
   flex-flow: row nowrap;
   flex: 1;
@@ -41,7 +43,7 @@ const Title = styled.h3`
 const SubTitle = styled.h5`
   font-size: 1.3rem;
   font-weight: 300;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 `;
 
 const Actors = styled.ul`
@@ -73,7 +75,7 @@ const Category = styled.ul`
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  margin-bottom: .5rem;
+  margin-bottom: 1rem;
 `;
 
 const Cate = styled.li`
@@ -87,8 +89,8 @@ const Cut = styled.span`
   width: .1rem;
   height: 1rem;
   display: block;
-  background-color: ${props => props.theme.darkGreyColor};
-  margin: 0 .5rem;
+  background-color: ${props => props.theme.darkGreyColor}50;
+  margin: 0 1rem;
 `;
 
 const OpenDt = styled.div`
@@ -96,13 +98,28 @@ const OpenDt = styled.div`
   flex-flow: row nowrap;
   font-size: 1.4rem;
   align-items: center;
-  margin-bottom: .5rem;
+  margin-bottom: 1rem;
   font-weight: 300;
 `;
 
 const Meta = styled.div`
   display: flex;
   flex-flow: row nowrap;
+`;
+
+const Hr = styled.hr`
+  margin: 1.5rem 0;
+  border-color: ${props => props.theme.darkGreyColor}50;
+`;
+
+const Button = styled.button`
+  width: 12.5rem;
+  height: 4rem;
+  background-color: ${props => props.theme.mainColor};
+  color: ${props => props.theme.whiteColor};
+  &:hover {
+    background-color: ${props => props.theme.mainColor}95;
+  }
 `;
 
 const MovieDetail = ({ match: { params: { movieCd } } }) => {
@@ -135,6 +152,11 @@ const MovieDetail = ({ match: { params: { movieCd } } }) => {
   return (
     !isLoading &&
     <Container>
+      <Helmet>
+        <title>
+          Movies | {movie.movieNm}
+        </title>
+      </Helmet>
       <PosterContainer>
         <Poster src={poster} />
       </PosterContainer>
@@ -189,6 +211,8 @@ const MovieDetail = ({ match: { params: { movieCd } } }) => {
             )}
           </Actors>
         </Meta>
+        <Hr />
+        <Button onClick={() => null}>예매하기</Button>
       </MetaContainer>
     </Container>
   );
