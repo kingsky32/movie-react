@@ -12,6 +12,8 @@ import Header from "./Header";
 import Event from "../routes/Event";
 import RouteContainer from "./RouteContainer";
 import MovieDetail from "../routes/MovieDetail";
+import Search from "../routes/Search";
+import "../styles/fonts.css";
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,12 +23,11 @@ const Wrapper = styled.div`
   font-size: 1.2rem;
 `;
 
-const App = props => {
+const App = () => {
   return (
     <ThemeProvider theme={Theme}>
       <Helmet>
         <title>Movies</title>
-        <link rel="stylesheet" href="../styles/fonts.css" />
       </Helmet>
       <GlobalStyles />
       <Router>
@@ -51,6 +52,7 @@ const App = props => {
             path="/event"
             render={() => <RouteContainer title="Event" component={<Event />} />}
           />
+          <Route path="/search" component={Search} />
         </Wrapper>
       </Router>
     </ThemeProvider>

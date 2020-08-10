@@ -8,18 +8,18 @@ const date = new Date();
 const nowDate = moment(date);
 
 const DailyBoxOffice = () => {
-  const [isLoading, setIsloading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [weeklyBoxOfficeList, setWeeklyBoxOfficeList] = useState([]);
 
   const getData = async () => {
     try {
-      setIsloading(true);
+      setIsLoading(true);
       const data = await getWeeklyBoxOfficeList({ targetDate: nowDate });
       setWeeklyBoxOfficeList(data);
     } catch (error) {
       console.log(error);
     } finally {
-      setIsloading(false);
+      setIsLoading(false);
     }
   };
 

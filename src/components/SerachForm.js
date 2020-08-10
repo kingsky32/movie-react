@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import useInput from "../hooks/useInput";
+import { withRouter } from "react-router-dom";
 
 const Container = styled.form`
   display: flex;
@@ -45,16 +46,18 @@ const EFontAwesomeIcon = styled(FontAwesomeIcon)`
   color: ${props => props.theme.whiteColor}50;
 `;
 
-const Serach = () => {
-  const data = useInput("");
+export default withRouter(({ history }) => {
+  const search = useInput("");
+  const onSubmit = e => {
+    e.preventDefault();
+    history.push(`/search?term=${search.value}`);
+  };
   return (
-    <Container>
-      <Input value={data.value} onChange={data.onChange} placeholder="검색" />
+    <Container onSubmit={onSubmit}>
+      <Input value={search.value} onChange={search.onChange} placeholder="검색" />
       <Icon>
         <EFontAwesomeIcon icon={faSearch} size="lg" />
       </Icon>
     </Container>
   );
-};
-
-export default Serach;
+});

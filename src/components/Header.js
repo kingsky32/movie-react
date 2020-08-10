@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import logo from "../assets/image/logo512.png";
-import Serach from "./Serach";
+import Serach from "./SerachForm";
 
 const Container = styled.header`
   display: flex;
