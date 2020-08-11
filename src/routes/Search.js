@@ -3,7 +3,10 @@ import getSearchMovie from "../components/getSearchMovie";
 import SearchCompoent from "../components/SearchCompoent";
 import styled from "styled-components";
 
-const Container = styled.div`flex: 1;`;
+const Container = styled.div`
+  flex: 1;
+  padding: 5rem 0;
+`;
 
 const Search = ({ location: { search } }) => {
   const searchName = search.split("=")[1];

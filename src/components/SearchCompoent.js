@@ -4,28 +4,36 @@ import getMovieDetail from "./getMovieDetail";
 import { Helmet } from "react-helmet";
 import getDetailMovie from "./getDetailMovie";
 import moment from "moment";
-
-const re = /<(\w)+>(.*?)<\/\1>/gi;
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
-  padding-top: 5rem;
   height: 15rem;
   margin-bottom: 2.5rem;
   display: flex;
   flex-flow: row nowrap;
   flex: 1;
-`;
-
-const PosterContainer = styled.div`
-  width: 12rem;
-  height: 15rem;
-  margin-right: 2.5rem;
+  a:hover {
+    color: ${props => props.theme.mainColor};
+  }
 `;
 
 const Poster = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: .25s transform ease;
+`;
+
+const PosterContainer = styled.div`
+  width: 12rem;
+  height: 15rem;
+  margin-right: 2.5rem;
+  background-color: ${props => props.theme.mainColor};
+  &:hover {
+    ${Poster} {
+      transform: translate(.5rem, -.5rem);
+    }
+  }
 `;
 
 const MetaContainer = styled.div`flex: 3;`;
@@ -116,19 +124,7 @@ const Meta = styled.div`
   flex-flow: row nowrap;
 `;
 
-const SearchCompoent = ({
-  movieCd,
-  movieNm,
-  directors,
-  genreAlt,
-  movieNmEn,
-  nationAlt,
-  prdtStatNm,
-  prdtYear,
-  repGenreNm,
-  repNationNm,
-  typeNm
-}) => {
+const SearchCompoent = ({ movieCd }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [poster, setPoster] = useState("");
   const [movie, setMovie] = useState(null);
@@ -161,27 +157,39 @@ const SearchCompoent = ({
         </title>
       </Helmet>
       <PosterContainer>
-        <Poster src={poster} />
+        <Link to={`/movies/movie/${movieCd}`}>
+          <Poster src={poster} />
+        </Link>
       </PosterContainer>
       <MetaContainer>
         <Title>
-          {movie.movieNm}
-          ({movie.prdtYear})
-          <Stat>{movie.prdtStatNm}</Stat>
+          <Link to={`/movies/movie/${movieCd}`}>
+            {movie.movieNm}
+            ({movie.prdtYear})
+          </Link>
+          <Stat>
+            {movie.prdtStatNm}
+          </Stat>
         </Title>
         <SubTitle>
-          {movie.movieNmEn}
+          <Link to={`/movies/movie/${movieCd}`}>
+            {movie.movieNmEn}
+          </Link>
         </SubTitle>
         <Category>
           {movie.genres.map((genre, idx) =>
             <Cate key={idx}>
-              {genre.genreNm}
+              <Link to={`/movies/movie/${movieCd}`}>
+                {genre.genreNm}
+              </Link>
             </Cate>
           )}
           <Cut />
           {movie.nations.map((nation, idx) =>
             <Cate key={idx}>
-              {nation.nationNm}
+              <Link to={`/movies/movie/${movieCd}`}>
+                {nation.nationNm}
+              </Link>
             </Cate>
           )}
         </Category>
