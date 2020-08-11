@@ -3,7 +3,7 @@ import getSearchMovie from "../components/getSearchMovie";
 import SearchCompoent from "../components/SearchCompoent";
 import styled from "styled-components";
 
-const Container = styled.div``;
+const Container = styled.div`flex: 1;`;
 
 const Search = ({ location: { search } }) => {
   const searchName = search.split("=")[1];
@@ -16,7 +16,6 @@ const Search = ({ location: { search } }) => {
         setIsLoading(true);
         try {
           const data = await getSearchMovie({ searchName });
-          console.log(data);
           setSearchData(data);
           setIsLoading(false);
         } catch (error) {
@@ -27,10 +26,12 @@ const Search = ({ location: { search } }) => {
     },
     [searchName]
   );
-
+  console.log(searchData);
   return (
     <Container>
-      {!isLoading && searchData.map((data, idx) => <SearchCompoent key={idx} {...data} />)}
+      {!isLoading &&
+        searchData &&
+        searchData.map((data, idx) => <SearchCompoent key={idx} {...data} />)}
     </Container>
   );
 };

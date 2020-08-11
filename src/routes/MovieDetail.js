@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import getDetailMovie from "../components/getDetailMovie";
-import getSearchMovie from "../components/getSearchMovie";
+import getMovieDetail from "../components/getMovieDetail";
 import moment from "moment";
 import { Helmet } from "react-helmet";
 
@@ -132,7 +132,7 @@ const MovieDetail = ({ match: { params: { movieCd } } }) => {
       const getData = async () => {
         try {
           const data = await getDetailMovie({ movieCd });
-          const [posterData] = await getSearchMovie({
+          const [posterData] = await getMovieDetail({
             searchName: data.movieInfo.movieNm,
             display: 1
           });

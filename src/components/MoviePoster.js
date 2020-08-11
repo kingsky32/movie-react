@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import getSearchMovie from "./getSearchMovie";
+import getMovieDetail from "./getMovieDetail";
 import LoadingComponent from "./LoadingMoviePoster";
 
 const Container = styled.div`
@@ -77,7 +77,7 @@ const MoviePoster = ({ movieNm, movieCd, cate = [] }) => {
       const getData = async () => {
         try {
           setIsloading(true);
-          const [data] = await getSearchMovie({ searchName: movieNm, display: 1 });
+          const [data] = await getMovieDetail({ searchName: movieNm, display: 1 });
           setBoxOfficeList(data);
           setIsloading(false);
         } catch (error) {
