@@ -212,7 +212,7 @@ const MovieDetail = ({ match: { params: { movieCd } } }) => {
           </Actors>
         </Meta>
         <Hr />
-        <Button onClick={() => null}>예매하기</Button>
+        {movie.prdtStatNm === "개봉" && <Button onClick={() => null}>예매하기</Button>}
       </MetaContainer>
     </Container>
   );

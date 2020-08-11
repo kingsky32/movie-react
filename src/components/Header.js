@@ -55,10 +55,6 @@ const Header = () => {
         <ELink to="/">
           <Image src={logo} />
         </ELink>
-        <ELink to="/movies">영화</ELink>
-        <ELink to="/ticket">예매</ELink>
-        <ELink to="/theaters">극장</ELink>
-        <ELink to="/event">이벤트&amp;컬쳐</ELink>
       </Navigation>
       <SearchContainer>
         <Serach />
